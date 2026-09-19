@@ -18,23 +18,22 @@ inputs:
     default: Your favorite tools and inspiration, one click away.
     required: true
   - id: accent_color
-    name: Accent color
+    name: Accent color (hex)
     type: text
     default: '#b6f46b'
     required: true
     description: Six-digit hex color, such as #b6f46b.
   - id: background_color
-    name: Background color
+    name: Background color (hex)
     type: text
     default: '#101b20'
     required: true
     description: Six-digit hex color, such as #101b20.
-  - id: logo_url
-    name: Logo image URL
-    type: text
-    default: ''
+  - id: logo_file
+    name: Logo image
+    type: file
     required: false
-    description: Optional public HTTPS image URL. Leave blank for the Orbit symbol.
+    description: Optional PNG, JPEG, or WebP image. It is embedded into the deployed launchpad.
 instructions:
   - id: checkout
     run: git clone https://github.com/insightifyr/brand-launchpad-template.git /home/user/launchpad
