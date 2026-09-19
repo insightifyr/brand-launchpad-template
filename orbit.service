@@ -1,0 +1,12 @@
+[Unit]
+Description=Orbit branded launchpad
+After=network.target
+[Service]
+User=user
+WorkingDirectory=/home/user/launchpad/public
+ExecStart=/usr/bin/python3 -m http.server 8080 --bind 0.0.0.0
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+[Install]
+WantedBy=multi-user.target

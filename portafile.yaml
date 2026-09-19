@@ -1,0 +1,50 @@
+portafile_version: 1
+name: Orbit Brand Launchpad
+source_template: ubuntu-25
+username: user
+resources:
+  disk_gib: 5
+  ram_mib: 512
+  cpus: 0.5
+inputs:
+  - id: brand_name
+    name: Brand name
+    type: text
+    default: Orbit
+    required: true
+  - id: welcome_message
+    name: Welcome message
+    type: text
+    default: Your favorite tools and inspiration, one click away.
+    required: true
+  - id: accent_color
+    name: Accent color
+    type: text
+    default: '#b6f46b'
+    required: true
+    description: Six-digit hex color, such as #b6f46b.
+  - id: background_color
+    name: Background color
+    type: text
+    default: '#101b20'
+    required: true
+    description: Six-digit hex color, such as #101b20.
+  - id: logo_url
+    name: Logo image URL
+    type: text
+    default: ''
+    required: false
+    description: Optional public HTTPS image URL. Leave blank for the Orbit symbol.
+instructions:
+  - id: checkout
+    run: git clone https://github.com/insightifyr/brand-launchpad-template.git /home/user/launchpad
+  - id: configure
+    run: cd /home/user/launchpad && python3 configure.py
+  - id: start
+    run: sudo cp /home/user/launchpad/orbit.service /etc/systemd/system/orbit.service && sudo systemctl daemon-reload && sudo systemctl enable --now orbit && sudo systemctl restart orbit
+  - wait_for: http://localhost:8080/
+  - wait_for: https://[exposed:8080]/
+expose_ports:
+  - 8080
+project_paths:
+  - /home/user/launchpad
